@@ -3,8 +3,8 @@
 FIFOs or any other memory element require more detailed verification effort before it can synthesized on hardware like FPGAs/ASIC.
 Here, I have presented many different assertions that can be utilized to verify a synchronous FIFO using SystemVerilog.
 
-I encourage you to go through them and then try to write your own assertions for your design specific FIFO. The assertions described
-is not an exhastive list. I have left other check for you to add.
+I encourage you to go through them and then try to write your own assertions for your design specific FIFO. **The assertions described
+are not an exhastive list. I have left other check for you to add.**
 Remember, there are many ways of capturing an assertion, so don't use my constructs to be the only way of wirting assertions :-)
 
 1) Asynchronous reset assertions
