@@ -112,6 +112,7 @@ module syncFIFO_v2
     // @(posedge i_clk) disable iff(!i_rst_n) o_full |-> ##1 $stable(wr_ptr);
     // alternative way of writing the same assertion
     @(posedge i_clk) disable iff(!i_rst_n) o_full |-> ##1 wr_ptr == $past(wr_ptr);
+  endproperty
   
   assert property (dont_write_if_full)
     else $display("failed at time p2: ", $time);
