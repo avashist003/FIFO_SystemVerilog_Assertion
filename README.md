@@ -40,14 +40,14 @@ Remember, there are many ways of capturing an assertion, so don't use my constru
   property dont_write_if_full;
     // @(posedge i_clk) disable iff(!i_rst_n) o_full |-> ##1 $stable(wr_ptr);
     // alternative way of writing the same assertion
-    @(posedge i_clk) disable iff(!i_rst_n) o_full |-> ##1 wr_ptr == $past(wr_ptr);
+    @(posedge i_clk) disable iff(!i_rst_n) wr_en && o_full |-> ##1 wr_ptr == $past(wr_ptr);
   endproperty
 ```
 
 4) Rule-2: Never read from an Empty FIFO!
 ```sv
   property dont_read_if_empty;
-    @(posedge i_clk) disable iff(!i_rst_n) o_empty |-> ##1 $stable(rd_ptr);
+    @(posedge i_clk) disable iff(!i_rst_n) rd_en && o_empty |-> ##1 $stable(rd_ptr);
   endproperty
 ```
 
