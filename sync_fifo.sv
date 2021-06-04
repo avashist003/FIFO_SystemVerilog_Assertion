@@ -74,9 +74,22 @@ module syncFIFO_v2
   * ASSERTIONS Synchronous FIFO
   */
   
-  // 1) check if data written to a location is the same data read when read ptr reaches the location
-  // This is a really great way to test fifo and should be used for any memory based design
-  // it's more involved to write such an assertion but great way to use systemverilog features
+  // Reset startup check //
+  // need this at the very begining of the simulation //
+  property async_rst_startup;
+	  @(posedge i_clk) !i_rst_n |-> ##1 (wr_ptr==0 && rd_ptr == 0 && o_empty);
+  endproperty
+	assert property (async_rst_startup);
+		else $display("rst assertion failed at strup", $time);
+  // rst check in general
+  property async_rst_chk;
+	  @(negedge i_rst_n) 1'b1 |-> ##1 @(posedge i_clk) (wr_ptr==0 && rd_ptr == 0 && o_empty);
+  endproperty
+	assert property (async_rst_chk);
+		else $display("rst assertion failed: ", $time);
+// 1) check if data written to a location is the same data read when read ptr reaches the location
+// This is a really great way to test fifo and should be used for any memory based design
+// it's more involved to write such an assertion but great way to use systemverilog features
   
   sequence rd_detect(ptr);
     ##[0:$] (rd_en && !o_empty && (rd_ptr == ptr));
