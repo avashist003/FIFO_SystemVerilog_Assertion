@@ -111,7 +111,7 @@ module syncFIFO_v2
   property dont_write_if_full;
     // @(posedge i_clk) disable iff(!i_rst_n) o_full |-> ##1 $stable(wr_ptr);
     // alternative way of writing the same assertion
-    @(posedge i_clk) disable iff(!i_rst_n) o_full |-> ##1 wr_ptr == $past(wr_ptr);
+	  @(posedge i_clk) disable iff(!i_rst_n) wr_en && o_full |-> ##1 wr_ptr == $past(wr_ptr);
   endproperty
   
   assert property (dont_write_if_full)
@@ -119,7 +119,7 @@ module syncFIFO_v2
   
     // 3) don't read when empty: second golden rule 
     property dont_read_if_empty;
-      @(posedge i_clk) disable iff(!i_rst_n) o_empty |-> ##1 $stable(rd_ptr);
+	    @(posedge i_clk) disable iff(!i_rst_n) rd_en && o_empty |-> ##1 $stable(rd_ptr);
     endproperty
     
     assert property (dont_read_if_empty)
