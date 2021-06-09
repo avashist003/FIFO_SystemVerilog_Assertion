@@ -38,7 +38,7 @@ module syncFIFO_v2
   begin
     if(!i_rst_n)
     begin
-      wr_ptr <={1'b0,WIDTH{1'b0}};
+      wr_ptr <= 5'h00;
     end
 
     else
@@ -55,7 +55,7 @@ module syncFIFO_v2
   begin
     if(!i_rst_n)
     begin
-      rd_ptr <= 1'b0,WIDTH{1'b0}};
+      rd_ptr <= 5'h00;
     end
     else
     begin
