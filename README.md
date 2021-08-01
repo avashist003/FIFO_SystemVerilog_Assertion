@@ -9,7 +9,6 @@ Remember, there are many ways of capturing an assertion, so don't use my constru
 
 1) Asynchronous reset assertions
 
-{% highlight ruby %}
 ``` sv
   // Reset startup check //
   // need this at the very begining of the simulation //
@@ -22,7 +21,6 @@ Remember, there are many ways of capturing an assertion, so don't use my constru
 	  @(negedge i_rst_n) 1'b1 |-> ##1 @(posedge i_clk) (wr_ptr==0 && rd_ptr == 0 && o_empty);
   endproperty
   ```
-  {% endhighlight %}
 
 2) Check data written at a location is the same data read when read_ptr reaches that location
 ``` sv
