@@ -22,11 +22,12 @@ module test_v2();
   end
 
   initial begin
-    i_clk <= 1'b0;
-    i_rst_n <= 1'b0;
-    wr_en <= 1'b0;
-    rd_en <= 1'b0;
-    #100 i_rst_n <= 1'b1;
+    i_clk = 1'b0;
+    i_rst_n = 1'b0;
+    wr_en = 1'b0;
+    rd_en = 1'b0;
+    i_data = 32'h00000000;
+    #100 i_rst_n = 1'b1;
 
     write_task;
     #20;
@@ -48,7 +49,6 @@ module test_v2();
     begin
       @(negedge i_clk);
         i_data = $urandom($random)%16;
-      @(posedge i_clk);
       @(posedge i_clk);
   // 		$display(" FIFO WRITE DATA");
   // 		$display("in data:  %d", i_data);
